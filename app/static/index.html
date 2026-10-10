@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090d12">
+  <meta name="description" content="Ayushmaan’s personal workspace for exploring scenes in images.">
+  <title>SceneSense AI — Ayushmaan’s Visual Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css?v=1">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">S</span><span><span class="brand-title">SceneSense <i>AI</i><small>STUDIO 2.4</small></span><span class="brand-subtitle">Ayushmaan’s Visual Studio</span></span></a>
+    <div class="header-tools"><div class="provider-pill"><i class="status-dot" id="healthDot"></i><span id="providerLabel">CONNECTING</span><b>|</b><code id="modelLabel">Checking model…</code></div><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">☾</button><div class="user-chip"><span>AY</span><b>Ayushmaan</b></div></div>
+  </header>
+  <main class="page-shell">
+    <section class="intro-column">
+      <div class="hero"><span class="eyebrow">✦ &nbsp; YOUR PERSONAL SCENE STUDIO</span><h1>See more in every<br><em>story.</em></h1><p>Welcome back, <strong>Ayushmaan.</strong> Bring a photo into focus and explore high-resolution spatial details, objects, and contextual visual narratives.</p></div>
+      <section class="workflow panel"><h2>ANALYSIS WORKFLOW</h2><div class="step active" id="step1"><span>01</span><div><b>Choose an image <i>✓</i></b><small>Drop in a photo, select sample, or browse files</small></div></div><div class="step" id="step2"><span>02</span><div><b>We look closer</b><small>Vision model analyzes objects &amp; context</small></div></div><div class="step" id="step3"><span>03</span><div><b>See the full picture</b><small>Explore the scene summary and details</small></div></div></section>
+      <aside class="privacy-card panel"><span class="privacy-icon">✳</span><div><b id="privacyTitle">Image sent for analysis</b><small id="privacyText">The configured provider receives the image for analysis.</small></div></aside>
+    </section>
+    <section class="studio-column">
+      <section class="studio-card panel">
+        <div class="studio-heading"><div><span class="kicker">SCENE ANALYSIS STUDIO</span><h2>Start With An Image</h2></div><span class="ai-pill"><i></i> AI POWERED</span></div>
+        <div class="sample-heading"><span>Or choose a sample preset image:</span><small>1-click test</small></div>
+        <div class="sample-grid" id="sampleGrid">
+          <button class="sample" data-sample="street" type="button"><img alt="Urban street" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&amp;fit=crop&amp;w=400&amp;q=80"><span>Urban Street</span></button>
+          <button class="sample" data-sample="nature" type="button"><img alt="Misty forest" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&amp;fit=crop&amp;w=400&amp;q=80"><span>Nature Mist</span></button>
+          <button class="sample" data-sample="city" type="button"><img alt="City skyline" src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&amp;fit=crop&amp;w=400&amp;q=80"><span>Neon City</span></button>
+          <button class="sample" data-sample="gallery" type="button"><img alt="Art gallery" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&amp;fit=crop&amp;w=400&amp;q=80"><span>Art Gallery</span></button>
+        </div>
+        <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp" hidden>
+        <div class="dropzone" id="dropZone" tabindex="0" role="button" aria-label="Choose an image or drop it here">
+          <div class="empty-state" id="emptyState"><span class="upload-icon">☁↑</span><b>Drop your image here</b><span>or <button id="browseButton" type="button">browse files</button> from your computer</span><small>JPG, PNG, WEBP &nbsp;•&nbsp; UP TO 10 MB</small></div>
+          <div class="preview-state" id="previewState" hidden><img id="preview" alt="Full image preview"><div class="scan-overlay" id="scanOverlay" hidden><div class="scan-line"></div><span>Scanning visual features…</span></div><div class="image-meta" id="imageMeta"></div><button id="removeButton" type="button" aria-label="Remove image">×</button></div>
+        </div>
+        <div class="error-banner" id="errorBanner" role="alert" hidden></div>
+        <div class="control-row"><span class="connection-status"><i class="status-dot" id="connectionDot"></i><span id="connectionStatus">Checking server…</span></span><button class="analyze-button" id="analyzeButton" type="button" disabled><span>Analyze scene</span><i>↗</i></button></div>
+      </section>
+      <section class="results panel" id="results" hidden>
+        <div class="results-heading"><div><span class="kicker">ANALYSIS SUMMARY</span><h2>Visual Intelligence Breakdown</h2></div><div class="result-tools"><span id="resultMeta"></span><button id="copyButton" type="button">Copy JSON</button></div></div>
+        <div id="resultWarning" class="result-warning" hidden></div>
+        <article class="narrative"><span class="result-label">✦ &nbsp; SCENE STORY NARRATIVE</span><p id="summary"></p><div class="context"><b>CONTEXT</b><span id="context"></span></div></article>
+        <div class="result-grid"><article class="result-card"><h3>Detected Key Entities <span id="objectCount"></span></h3><div id="objects" class="object-list"></div></article><article class="result-card"><h3>Spatial Relationships</h3><div id="relationships" class="result-list"></div></article><article class="result-card"><h3>Activities</h3><div id="activities" class="result-list"></div></article></div>
+        <details class="json-panel"><summary>View structured JSON <span>＋</span></summary><pre id="jsonOutput"></pre></details>
+      </section>
+      <p class="disclaimer">SceneSense AI may make mistakes. Review important details and verify inferences.</p>
+    </section>
+  </main>
+  <script src="/static/app.js?v=1" defer></script>
+</body></html>
